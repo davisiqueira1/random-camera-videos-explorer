@@ -1,3 +1,4 @@
+import "./VideoContainer.css"
 import YouTube from "react-youtube";
 import * as PropTypes from "prop-types";
 
