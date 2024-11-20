@@ -4,31 +4,31 @@ import {Component} from "react";
 import {dummyData} from "./utils/dummyData.js";
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            fetchVideoDetails: () => {
-                const data = dummyData[Math.floor(Math.random() * dummyData.length)]
-                console.log(data)
-                this.setState({
-                    videoDetails: data
-                })
-            },
-            videoDetails: null,
+            videoDetails: undefined,
         }
     }
 
+    fetchVideoDetails = () => {
+        const data = dummyData[Math.floor(Math.random() * dummyData.length)];
+        console.log(data);
+        this.setState({
+            videoDetails: data
+        });
+    };
+
     componentDidMount() {
-        this.state.fetchVideoDetails()
+        this.fetchVideoDetails()
     }
 
     render() {
-        if (this.state.videoDetails === null) return <div>Loading...</div>
+        if (this.state.videoDetails === undefined) return <div>Loading...</div>
 
         return (
             <div>
-                <h1>{this.state.videoDetails["videoId"]}</h1>
-                <VideoContainer videoInfo={this.state.videoDetails} fetchNextVideo={this.state.fetchVideoDetails}/>
+                <VideoContainer videoInfo={this.state.videoDetails} fetchNextVideo={this.fetchVideoDetails}/>
             </div>
         )
     }
