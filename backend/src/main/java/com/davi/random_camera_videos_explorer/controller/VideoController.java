@@ -4,12 +4,14 @@ import com.davi.random_camera_videos_explorer.dto.VideoInfoDTO;
 import com.davi.random_camera_videos_explorer.service.VideoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/videos")
+@CrossOrigin(origins = "*")
 public class VideoController {
     private final VideoService videoService;
 
