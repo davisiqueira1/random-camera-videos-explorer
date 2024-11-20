@@ -31,7 +31,6 @@ public class VideoService {
         JsonNode randomVideo = searchItems.get(getRandomNumberBetween(0, searchItems.size() - 1));
 
         String videoId = randomVideo.path("id").path("videoId").asText();
-        String url = "https://www.youtube.com/watch?v=" + videoId;
         String title = randomVideo.path("snippet").path("title").asText();
         String publishDateString = randomVideo.path("snippet").path("publishedAt").asText();
         LocalDateTime publishDate = LocalDateTime.parse(publishDateString, DateTimeFormatter.ISO_DATE_TIME);
@@ -39,7 +38,7 @@ public class VideoService {
         JsonNode videoStatistics = getVideoStatistics(videoId);
         int views = videoStatistics.path("viewCount").asInt();
 
-        return new VideoInfoDTO(url, title, publishDate, views);
+        return new VideoInfoDTO(videoId, title, publishDate, views);
     }
 
     private String getSearchApiUrl(String keyword) {
