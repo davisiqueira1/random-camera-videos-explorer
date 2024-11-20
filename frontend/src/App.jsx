@@ -1,4 +1,3 @@
-import './App.css'
 import {VideoContainer} from "./components/video-container/VideoContainer.jsx";
 import {Component} from "react";
 import {dummyData} from "./utils/dummyData.js";
