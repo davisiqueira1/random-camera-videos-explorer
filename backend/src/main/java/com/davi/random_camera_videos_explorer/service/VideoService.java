@@ -1,6 +1,7 @@
 package com.davi.random_camera_videos_explorer.service;
 
 import com.davi.random_camera_videos_explorer.dto.VideoInfoDTO;
+import com.davi.random_camera_videos_explorer.exceptions.VideosNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +29,10 @@ public class VideoService {
         final String keyword = "IMG_" + getRandomNumberBetween(0, 1000);
 
         List<JsonNode> searchItems = getSearchItems(keyword);
+        if (searchItems.isEmpty()) {
+            throw new VideosNotFoundException("No videos found with keyword '" + keyword + "'.");
+        }
+
         JsonNode randomVideo = searchItems.get(getRandomNumberBetween(0, searchItems.size() - 1));
 
         String videoId = randomVideo.path("id").path("videoId").asText();
