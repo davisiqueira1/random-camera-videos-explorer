@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    image: rcve-be:1.0
+    container_name: backend
+    networks:
+      - rcve-network
+    ports:
+      - "5001:8080"
+
+  frontend:
+    image: rcve-fe:1.0
+    container_name: frontend
+    networks:
+      - rcve-network
+    ports:
+      - "5000:80"
+    depends_on:
+      - backend
+
+networks:
+  rcve-network:
+    driver: bridge
