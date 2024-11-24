@@ -1,6 +1,5 @@
 import {VideoContainer} from "./components/video-container/VideoContainer.jsx";
 import {Component} from "react";
-import {dummyData} from "./utils/dummyData.js";
 
 class App extends Component {
     constructor(props) {
@@ -10,9 +9,21 @@ class App extends Component {
         }
     }
 
-    fetchVideoDetails = () => {
-        const data = dummyData[Math.floor(Math.random() * dummyData.length)];
-        console.log(data);
+    fetchVideoDetails = async () => {
+        const API_BASE_URL = 'http://backend:8080';
+
+        const response = await fetch(`${API_BASE_URL}/api/videos/random`,
+        {
+                headers:{'Content-Type':'application/json'},
+                method:"GET"
+        })
+
+        if(response.status !== 200){
+            // todo: better error handling
+            return;
+        }
+
+        const data = await response.json();
         this.setState({
             videoDetails: data
         });
